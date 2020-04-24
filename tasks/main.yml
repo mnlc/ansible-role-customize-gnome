@@ -67,15 +67,11 @@
   include_tasks: get_extension_info.yml
   with_items: "{{ gnome_extensions }}"
 
-- name: Use gnome_extensions_full
-  set_fact:
-    gnome_extensions: "{{ gnome_extensions_full }}"
-
 - name: Download GNOME Shell extensions
   get_url:
     url: "{{ item.url }}"
     dest: "/tmp/{{ item.name }}.zip"
-  with_items: "{{ gnome_extensions|default([]) }}"
+  with_items: "{{ gnome_extensions_full|default([]) }}"
   tags:
     - extensions
 
@@ -84,7 +80,7 @@
     path: /home/{{ gnome_user }}/.local/share/gnome-shell/extensions/{{ item.name }}
     state: directory
   become_user: "{{ gnome_user }}"
-  with_items: "{{ gnome_extensions|default([]) }}"
+  with_items: "{{ gnome_extensions_full|default([]) }}"
   tags:
     - extensions
 
@@ -95,7 +91,7 @@
     creates: "/home/{{ gnome_user }}/.local/share/gnome-shell/extensions/{{ item.name }}/metadata.json"
     remote_src: yes
   become_user: "{{ gnome_user }}"
-  with_items: "{{ gnome_extensions|default([])}}"
+  with_items: "{{ gnome_extensions_full|default([])}}"
   tags:
     - extensions
 
