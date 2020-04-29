@@ -107,14 +107,14 @@
     - settings
 
 - name: Modify application settings using gsettings
-  shell: dbus-launch gsettings set {{ item }}
+  shell: 'gsettings set {{ item }}'
   become_user: "{{ gnome_user }}"
   with_items: "{{ gnome_gsettings|default([]) }}"
   tags:
     - settings
 
 - name: Modify application settings using dconf
-  shell: dbus-launch dconf write {{ item.key }} {{ item.value }}
+  shell: 'dconf write {{ item.key }} {{ item.value }}'
   become_user: "{{ gnome_user }}"
   with_items: "{{ gnome_dconf|default([]) }}"
   tags:
