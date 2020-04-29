@@ -80,9 +80,7 @@ should be contained within single quotes AND double quotes, due to Ansible's
 quoting settings for shell commands. Example:
 ```
 gnome_gsettings:
-  - schema: org.gnome.desktop.interface
-    key: monospace-font-name
-    value: '"Source Code Pro Medium 16"'
+  - 'org.gnome.desktop.interface monospace-font-name "Source Code Pro Medium 16"'
 ```
 
 **gnome_dconf**: A list of dconf entries that will be set for the `gnome_user`,
@@ -138,9 +136,7 @@ Example Playbook
       - id: 1112
         enable: yes
     gnome_gsettings:
-      - schema: org.gnome.desktop.interface
-        key: monospace-font-name
-        value: '"Source Code Pro Medium 16"'
+      - 'org.gnome.desktop.interface monospace-font-name "Source Code Pro Medium 16"'
     gnome_dconf:
       - key: /org/gnome/desktop/background/show-desktop-icons
         value: "false"
