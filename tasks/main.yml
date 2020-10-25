@@ -60,6 +60,8 @@
 
 - name: Refresh font list
   shell: fc-cache -fv
+  when: (gnome_fonts is defined) and (gnome_fonts|length > 0)
+  changed_when: false
   tags:
     - fonts
 
